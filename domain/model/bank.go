@@ -11,6 +11,8 @@ type Bank struct {
 	Base `valid:"required"`
 	Code string `json:"code" valid:"notnull"`
 	Name string `json:"name" valid:"notnull"`
+
+	Accounts []*Account `valid:"-"`
 }
 
 func (bank *Bank) isValid() error {
@@ -23,7 +25,7 @@ func (bank *Bank) isValid() error {
 	return nil
 }
 
-func newBank(code string, name string) (*Bank, error) {
+func NewBank(code string, name string) (*Bank, error) {
 	bank := Bank{
 		Code: code,
 		Name: name,
