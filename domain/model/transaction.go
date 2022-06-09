@@ -23,12 +23,14 @@ type TransactionRepositoryInterface interface {
 
 type Transaction struct {
 	Base              `valid:"required"`
+	AccountIdFrom     string   `gorm:"column:account_from_id;type:uuid;" valid:"notnull"`
 	AccountFrom       *Account `valid:"-"`
-	Amount            float64  `json:"amount" valid:"notnull"`
+	Amount            float64  `json:"amount" gorm:"type:float" valid:"notnull"`
+	PixKeyIdTo        string   `gorm:"column:pix_key_id_to;type:uuid;" valid:"-"`
 	PixKeyTo          *PixKey  `valid:"-"`
-	Status            string   `json:"status" valid:"notnull"`
-	Description       string   `json:"descri ption" valid:"notnull"`
-	CancelDescription string   `json:"cancel_description" valid:"-"`
+	Status            string   `json:"status" gorm:"type:varchar(20)" valid:"notnull"`
+	Description       string   `json:"descri ption" gorm:"type:varchar(255)" valid:"notnull"`
+	CancelDescription string   `json:"cancel_description" gorm:"type:varchar(255)" valid:"-"`
 }
 
 type Transactions struct {
