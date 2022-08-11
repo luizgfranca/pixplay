@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -17,9 +18,11 @@ func init() {
 	_, b, _, _ := runtime.Caller(0)
 	basePath := filepath.Dir(b)
 
-	err := godotenv.Load(basePath + "/../../env")
+	fmt.Println("loading environment from: " + basePath + "/../../.env")
+
+	err := godotenv.Load(basePath + "/../../.env")
 	if err != nil {
-		log.Fatalf("Could not load .env file")
+		log.Fatal("Could not load .env file\n", err)
 	}
 }
 

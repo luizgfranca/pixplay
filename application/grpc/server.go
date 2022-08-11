@@ -11,8 +11,8 @@ import (
 
 func StartGRPCServer(db *gorm.DB, port int) {
 	server := grpc.NewServer()
-	address := fmt.Sprintf("0.0.0.0:#{port}")
-	listener, err := net.Listen("tpc", address)
+	address := fmt.Sprintf("0.0.0.0:%d", port)
+	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatal("error starting listener", err)
 	}
